@@ -14,10 +14,13 @@ def updateClusterID(data, centers):
     nData = len(data) 
     
     clusterID = [0] * nData
-    
-    # TODO 
     # assign the closet center to each data point
-
+    
+    for i in range(nData):
+	if squaredDistance(data[i],centers[0]) < squaredDistance(data[i],centers[1]) :
+  		clusterID[i] = 0;
+	else :
+		clusterID[i] = 1;
     
     return clusterID
 
