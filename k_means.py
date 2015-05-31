@@ -27,11 +27,31 @@ def updateClusterID(data, centers):
 # K: number of clusters 
 def updateCenters(data, clusterID, K):
     nDim = len(data[0])
+    nData = len(data)
     centers = [[0] * nDim for i in range(K)]
 
-    # TODO recompute the centers based on current clustering assignment
+    center1 = [0] * 2
+    center2 = [0] * 2
+    count1 = 0
+    count2 = 0
+
+    # recompute the centers based on current clustering assignment
     # If a cluster doesn't have any data points, in this homework, leave it to ALL 0s
 
+    for i in range(nData):
+    	if clusterID[i] == 0:
+		center1 = [ sum(x) for x in zip(center1, data[i]) ]
+		count1 = count1 + 1
+	else :
+		center2 = [ sum(x) for x in zip(center2, data[i]) ]
+		count2 = count2 + 1
+
+    center1 = [ x / count1 for x in center1 ]
+    center2 = [ x / count2 for x in center2 ]
+
+    centers[0] = center1
+    centers[1] = center2
+ 
     return centers 
 
 def kmeans(data, centers, maxIter = 100, tol = 1e-6):
